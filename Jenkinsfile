@@ -2,34 +2,55 @@ pipeline {
   agent any
 
   stages {
-    stage('Checkout') {
+
+    stage('Build') {
       steps {
-        git branch: 'main', url: 'https://github.com/Mita22-1/Task1_Part1'
+        echo 'Building the application...'
+        echo 'Tool: Maven (or npm for Node.js apps)'
       }
     }
 
-    stage('Install Dependencies') {
+    stage('Unit and Integration Tests') {
       steps {
-        bat 'npm install'
+        echo 'Running unit and integration tests...'
+        echo 'Tool: JUnit, Mocha, or Jest'
       }
     }
 
-    stage('Run Tests') {
+    stage('Code Analysis') {
       steps {
-        bat 'npm test || exit /b 0'  
+        echo 'Running static code analysis...'
+        echo 'Tool: SonarCloud or ESLint'
       }
     }
 
-    stage('Generate Coverage Report') {
+    stage('Security Scan') {
       steps {
-        bat 'npm run coverage || exit /b 0'  
+        echo 'Scanning for vulnerabilities...'
+        echo 'Tool: npm audit or Snyk'
       }
     }
 
-    stage('NPM Audit (Security Scan)') {
+    stage('Deploy to Staging') {
       steps {
-        bat 'npm audit || exit /b 0'  
+        echo 'Deploying to staging environment...'
+        echo 'Tool: AWS CLI, Docker, or SCP'
       }
     }
+
+    stage('Integration Tests on Staging') {
+      steps {
+        echo 'Running integration tests on staging...'
+        echo 'Tool: Selenium or Postman CLI'
+      }
+    }
+
+    stage('Deploy to Production') {
+      steps {
+        echo 'Deploying to production environment...'
+        echo 'Tool: AWS CLI or Ansible'
+      }
+    }
+
   }
 }
